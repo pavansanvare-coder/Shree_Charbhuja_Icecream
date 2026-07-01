@@ -1,0 +1,436 @@
+/* ===========================
+   SHREE CHARBHUJA ICECREAM
+   PREMIUM STYLE.CSS (PART 1)
+=========================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#fffaf7;
+    color:#222;
+    overflow-x:hidden;
+}
+
+/* Scroll Bar */
+
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-track{
+    background:#f2f2f2;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#ff9800;
+    border-radius:20px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background:#ff6f00;
+}
+
+/* Navbar */
+
+.navbar{
+    transition:.4s;
+}
+
+.navbar-brand{
+    font-size:28px;
+    font-weight:700;
+}
+
+.nav-link{
+    color:#fff!important;
+    margin-left:15px;
+    font-weight:500;
+    transition:.3s;
+}
+
+.nav-link:hover{
+    color:#ffc107!important;
+}
+
+.btn-warning{
+    border-radius:50px;
+    padding:10px 25px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.btn-warning:hover{
+    transform:translateY(-3px);
+    box-shadow:0 15px 30px rgba(0,0,0,.2);
+}
+
+/* Hero */
+
+.hero-img{
+    height:90vh;
+    object-fit:cover;
+    filter:brightness(55%);
+}
+
+.carousel-caption{
+    bottom:22%;
+}
+
+.carousel-caption h1{
+    font-size:60px;
+    font-weight:800;
+}
+
+.carousel-caption h2{
+    font-size:55px;
+    font-weight:700;
+}
+
+.carousel-caption p{
+    font-size:22px;
+}
+
+/* Section */
+
+section{
+    padding-top:70px;
+    padding-bottom:70px;
+}
+
+section h2{
+    font-weight:700;
+    margin-bottom:40px;
+    position:relative;
+}
+
+section h2::after{
+
+content:"";
+
+width:120px;
+height:5px;
+
+background:#ff9800;
+
+position:absolute;
+
+left:50%;
+
+bottom:-15px;
+
+transform:translateX(-50%);
+
+border-radius:10px;
+
+}
+
+/* Cards */
+
+.card{
+
+border:none;
+
+border-radius:20px;
+
+overflow:hidden;
+
+transition:.4s;
+
+}
+
+.card:hover{
+
+transform:translateY(-12px);
+
+box-shadow:0 20px 45px rgba(0,0,0,.15);
+
+}
+
+.card img{
+
+transition:.5s;
+
+}
+
+.card:hover img{
+
+transform:scale(1.08);
+
+}
+
+.card-body{
+
+padding:25px;
+
+}
+
+.card h4{
+
+font-weight:700;
+
+}
+
+.card h5{
+
+font-weight:700;
+
+}
+
+/* Buttons */
+
+button{
+
+transition:.3s;
+
+}
+
+button:hover{
+
+transform:scale(1.05);
+
+}
+
+/* ===========================
+   CATEGORIES
+=========================== */
+
+.category-card{
+    background:#fff;
+    border-radius:20px;
+    padding:30px;
+    text-align:center;
+    transition:.4s;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.category-card:hover{
+    transform:translateY(-10px);
+    background:#fff8e8;
+}
+
+.category-card i{
+    font-size:60px;
+    color:#ff9800;
+}
+
+.category-card h4{
+    margin-top:20px;
+    font-weight:700;
+}
+
+/* ===========================
+   WHY CHOOSE US
+=========================== */
+
+.bg-light{
+    background:linear-gradient(135deg,#fff8ef,#fff)!important;
+}
+
+.bg-light i{
+    transition:.4s;
+}
+
+.bg-light .col-md-4:hover i{
+    transform:scale(1.2);
+}
+
+/* ===========================
+   OFFER SECTION
+=========================== */
+
+.offer-box{
+    background:linear-gradient(135deg,#ff9800,#ff5722);
+    color:#fff;
+    border-radius:25px;
+    padding:60px;
+    text-align:center;
+}
+
+.offer-box h2{
+    font-size:45px;
+    font-weight:800;
+}
+
+.offer-box h3{
+    margin:20px 0;
+}
+
+/* ===========================
+   ABOUT
+=========================== */
+
+.about-img{
+    border-radius:25px;
+    transition:.5s;
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
+}
+
+.about-img:hover{
+    transform:scale(1.03);
+}
+
+.about-content h2{
+    font-weight:700;
+}
+
+.about-content p{
+    font-size:18px;
+    line-height:1.8;
+}
+
+.about-content ul{
+    list-style:none;
+    padding:0;
+}
+
+.about-content li{
+    margin:12px 0;
+    font-size:18px;
+}
+
+/* ===========================
+   REVIEW
+=========================== */
+
+.review-card{
+    border-radius:20px;
+    transition:.4s;
+}
+
+.review-card img{
+    border:5px solid #ffc107;
+}
+
+.review-card:hover{
+    transform:translateY(-10px);
+}
+
+/* ===========================
+   CONTACT
+=========================== */
+
+.contact-box{
+    background:#fff;
+    padding:35px;
+    border-radius:20px;
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+}
+
+.contact-box p{
+    font-size:18px;
+}
+
+iframe{
+    border-radius:20px;
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+
+footer{
+    margin-top:70px;
+}
+
+footer i{
+    cursor:pointer;
+    transition:.3s;
+}
+
+footer i:hover{
+    color:#ffc107;
+    transform:translateY(-5px);
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media(max-width:992px){
+
+.hero-img{
+    height:70vh;
+}
+
+.carousel-caption h1{
+    font-size:40px;
+}
+
+.carousel-caption h2{
+    font-size:35px;
+}
+
+}
+
+@media(max-width:768px){
+
+.hero-img{
+    height:60vh;
+}
+
+.carousel-caption{
+    bottom:10%;
+}
+
+.carousel-caption h1{
+    font-size:28px;
+}
+
+.carousel-caption h2{
+    font-size:25px;
+}
+
+.carousel-caption p{
+    font-size:16px;
+}
+
+.navbar-brand{
+    font-size:22px;
+}
+
+.card{
+    margin-bottom:20px;
+}
+
+.offer-box{
+    padding:30px;
+}
+
+.offer-box h2{
+    font-size:30px;
+}
+
+.about-content{
+    margin-top:30px;
+}
+
+}
+
+@media(max-width:576px){
+
+.hero-img{
+    height:50vh;
+}
+
+section{
+    padding:50px 0;
+}
+
+section h2{
+    font-size:28px;
+}
+
+.btn{
+    width:100%;
+    margin-top:10px;
+}
+
+}

@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ff9a3c,#ff6b6b);
+}
+
+.login-container{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.login-card{
+    width:400px;
+    background:#fff;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 15px 40px rgba(0,0,0,.2);
+}
+
+.login-card h2{
+    text-align:center;
+    margin-bottom:10px;
+    color:#ff6b00;
+    font-weight:700;
+}
+
+.login-card p{
+    text-align:center;
+    margin-bottom:25px;
+    color:#666;
+}
+
+.form-control{
+    height:50px;
+    border-radius:10px;
+}
+
+.btn-warning{
+    height:50px;
+    border-radius:10px;
+    font-weight:600;
+}
+
+a{
+    text-decoration:none;
+}
+
+a:hover{
+    text-decoration:underline;
+}
+
+@media(max-width:500px){
+
+.login-card{
+    width:100%;
+    padding:25px;
+}
+
+}
