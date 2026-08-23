@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root{
+    --primary:#f59e0b;
+    --primary-dark:#d97706;
+    --success:#16a34a;
+    --danger:#ef4444;
+    --bg:#f4f7fc;
+    --card:#ffffff;
+    --text:#1f2937;
+    --muted:#6b7280;
+    --shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+body{
+    background:var(--bg);
+}
+
+/* Card */
+
+.card,
+.summary-card{
+
+    background:var(--card);
+
+    border:none;
+
+    border-radius:18px;
+
+    box-shadow:var(--shadow);
+
+    padding:25px;
+
+}
+
+/* Form */
+
+.form-control,
+.form-select{
+
+    height:52px;
+
+    border-radius:12px;
+
+    border:1px solid #ddd;
+
+}
+
+.form-control:focus,
+.form-select:focus{
+
+    border-color:var(--primary);
+
+    box-shadow:0 0 0 .2rem rgba(245,158,11,.2);
+
+}
+
+textarea.form-control{
+
+    height:auto;
+
+    resize:none;
+
+}
+
+/* Summary */
+
+.summary-item{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-bottom:15px;
+
+    font-size:15px;
+
+}
+
+.summary-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-top:15px;
+
+    color:var(--muted);
+
+}
+
+.summary-total{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-top:20px;
+
+    font-size:22px;
+
+    font-weight:700;
+
+}
+
+/* Button */
+
+.btn-warning{
+
+    background:var(--primary);
+
+    border:none;
+
+    color:white;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    height:52px;
+
+    border-radius:12px;
+
+    transition:.3s;
+
+}
+
+.btn-warning:hover{
+
+    background:var(--primary-dark);
+
+    transform:translateY(-2px);
+
+}
+
+/* Payment Badge */
+
+.payment-box{
+
+    background:#fff8e6;
+
+    padding:12px;
+
+    border-radius:12px;
+
+    color:var(--primary-dark);
+
+    margin-bottom:20px;
+
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+.summary-card{
+
+    margin-top:20px;
+
+}
+
+}

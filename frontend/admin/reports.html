@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Admin Reports</title>
+
+
+<!-- Bootstrap -->
+
+<link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+>
+
+
+<!-- Bootstrap Icons -->
+
+<link
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    rel="stylesheet"
+>
+
+
+<!-- Chart.js -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/chart.js">
+</script>
+
+
+<!-- Admin CSS -->
+
+<link
+    rel="stylesheet"
+    href="css/admin.css"
+>
+
+
+<style>
+
+body {
+
+    background: #f4f6f9;
+
+}
+
+
+/* ============================= */
+/* Report Cards */
+/* ============================= */
+
+.report-card {
+
+    border: none;
+
+    border-radius: 15px;
+
+    padding: 25px;
+
+    background: white;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,0.08);
+
+    transition: 0.3s;
+
+}
+
+
+.report-card:hover {
+
+    transform: translateY(-5px);
+
+}
+
+
+.report-card .icon {
+
+    font-size: 32px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.report-card h2 {
+
+    font-weight: 700;
+
+    margin: 5px 0;
+
+}
+
+
+.report-card p {
+
+    margin: 0;
+
+    color: #777;
+
+}
+
+
+/* ============================= */
+/* Chart Cards */
+/* ============================= */
+
+.report-chart {
+
+    border: none;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,0.08);
+
+}
+
+
+.report-chart .card-header {
+
+    background: white;
+
+    border-bottom: 1px solid #eee;
+
+    font-weight: 600;
+
+    font-size: 18px;
+
+    padding: 18px 20px;
+
+}
+
+
+.chart-container {
+
+    position: relative;
+
+    height: 320px;
+
+}
+
+
+/* ============================= */
+/* Top Products */
+/* ============================= */
+
+.top-products {
+
+    border: none;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,0.08);
+
+}
+
+
+.top-products .card-header {
+
+    background: white;
+
+    font-weight: 600;
+
+    font-size: 18px;
+
+    padding: 18px 20px;
+
+}
+
+
+.table {
+
+    margin-bottom: 0;
+
+}
+
+
+.table thead th {
+
+    background: #f8f9fa;
+
+}
+
+
+.rank {
+
+    font-weight: bold;
+
+}
+
+
+.empty-message {
+
+    text-align: center;
+
+    color: #777;
+
+    padding: 25px;
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="d-flex">
+
+
+<!-- ================================================= -->
+<!-- SIDEBAR -->
+<!-- ================================================= -->
+
+<div class="sidebar">
+
+
+    <h3>
+        🍦 Admin Panel
+    </h3>
+
+
+    <a href="dashboard.html">
+
+        <i class="bi bi-speedometer2"></i>
+
+        Dashboard
+
+    </a>
+
+
+    <a href="products.html">
+
+        <i class="bi bi-box-seam"></i>
+
+        Products
+
+    </a>
+
+
+    <a href="orders.html">
+
+        <i class="bi bi-bag"></i>
+
+        Orders
+
+    </a>
+
+
+    <a href="users.html">
+
+        <i class="bi bi-people"></i>
+
+        Users
+
+    </a>
+
+
+    <a
+        class="active"
+        href="reports.html"
+    >
+
+        <i class="bi bi-bar-chart"></i>
+
+        Reports
+
+    </a>
+
+
+    <a
+        href="#"
+        onclick="logout()"
+    >
+
+        <i class="bi bi-box-arrow-right"></i>
+
+        Logout
+
+    </a>
+
+
+</div>
+
+
+
+<!-- ================================================= -->
+<!-- MAIN CONTENT -->
+<!-- ================================================= -->
+
+<div class="content">
+
+
+    <!-- TOPBAR -->
+
+    <div class="topbar">
+
+
+        <div>
+
+            <h2 class="mb-1">
+                Reports
+            </h2>
+
+            <small class="text-muted">
+                Business analytics & performance
+            </small>
+
+        </div>
+
+
+        <div>
+
+            Welcome,
+
+            <strong id="adminName">
+                Admin
+            </strong>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- SUMMARY CARDS -->
+    <!-- ================================================= -->
+
+    <div class="row mt-4 g-4">
+
+
+        <!-- PRODUCTS -->
+
+        <div class="col-xl-3 col-md-6">
+
+            <div class="report-card">
+
+
+                <i
+                    class="bi bi-box-seam-fill icon"
+                ></i>
+
+
+                <h2 id="products">
+                    0
+                </h2>
+
+
+                <p>
+                    Total Products
+                </p>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ORDERS -->
+
+        <div class="col-xl-3 col-md-6">
+
+            <div class="report-card">
+
+
+                <i
+                    class="bi bi-bag-fill icon"
+                ></i>
+
+
+                <h2 id="orders">
+                    0
+                </h2>
+
+
+                <p>
+                    Total Orders
+                </p>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- REVENUE -->
+
+        <div class="col-xl-3 col-md-6">
+
+            <div class="report-card">
+
+
+                <i
+                    class="bi bi-currency-rupee icon"
+                ></i>
+
+
+                <h2 id="revenue">
+                    ₹0
+                </h2>
+
+
+                <p>
+                    Total Revenue
+                </p>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- USERS -->
+
+        <div class="col-xl-3 col-md-6">
+
+            <div class="report-card">
+
+
+                <i
+                    class="bi bi-people-fill icon"
+                ></i>
+
+
+                <h2 id="users">
+                    0
+                </h2>
+
+
+                <p>
+                    Total Users
+                </p>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- CHARTS -->
+    <!-- ================================================= -->
+
+    <div class="row mt-4 g-4">
+
+
+        <!-- MONTHLY SALES -->
+
+        <div class="col-lg-7">
+
+            <div class="card report-chart">
+
+
+                <div class="card-header">
+
+                    <i class="bi bi-graph-up"></i>
+
+                    Monthly Sales
+
+                </div>
+
+
+                <div class="card-body">
+
+                    <div class="chart-container">
+
+                        <canvas
+                            id="salesChart">
+                        </canvas>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ORDER STATUS -->
+
+        <div class="col-lg-5">
+
+            <div class="card report-chart">
+
+
+                <div class="card-header">
+
+                    <i class="bi bi-pie-chart"></i>
+
+                    Order Status
+
+                </div>
+
+
+                <div class="card-body">
+
+                    <div class="chart-container">
+
+                        <canvas
+                            id="statusChart">
+                        </canvas>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- TOP PRODUCTS -->
+    <!-- ================================================= -->
+
+    <div class="card top-products mt-4">
+
+
+        <div
+            class="card-header d-flex justify-content-between align-items-center"
+        >
+
+            <span>
+
+                <i class="bi bi-trophy"></i>
+
+                Top Selling Products
+
+            </span>
+
+
+            <span class="badge bg-warning text-dark">
+
+                Top 5
+
+            </span>
+
+        </div>
+
+
+        <div class="card-body">
+
+
+            <div class="table-responsive">
+
+
+                <table class="table table-hover align-middle">
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                #
+                            </th>
+
+                            <th>
+                                Product
+                            </th>
+
+                            <th>
+                                Sold Quantity
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="topProducts">
+
+                        <tr>
+
+                            <td
+                                colspan="3"
+                                class="empty-message"
+                            >
+
+                                Loading...
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- ================================================= -->
+<!-- JAVASCRIPT -->
+<!-- ================================================= -->
+
+<script>
+
+
+const API =
+    "http://localhost:5000/api/admin";
+
+
+
+// =====================================================
+// PAGE LOAD
+// =====================================================
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+
+        const user =
+            JSON.parse(
+                localStorage.getItem("user")
+            );
+
+
+        // Admin security
+
+        if (
+            !user ||
+            user.role !== "admin"
+        ) {
+
+            window.location.href =
+                "../pages/login.html";
+
+            return;
+
+        }
+
+
+        // Admin name
+
+        document.getElementById(
+            "adminName"
+        ).innerText =
+            user.name || "Admin";
+
+
+        // Load reports
+
+        loadSummary();
+
+        loadMonthlySales();
+
+        loadOrderStatus();
+
+        loadTopProducts();
+
+
+    }
+);
+
+
+
+// =====================================================
+// SUMMARY
+// =====================================================
+
+async function loadSummary() {
+
+    try {
+
+
+        const res =
+            await fetch(
+                `${API}/reports/summary`
+            );
+
+
+        const data =
+            await res.json();
+
+
+        console.log(
+            "Summary:",
+            data
+        );
+
+
+        if (!data.success) {
+
+            return;
+
+        }
+
+
+        document.getElementById(
+            "products"
+        ).innerText =
+            data.report.products || 0;
+
+
+        document.getElementById(
+            "orders"
+        ).innerText =
+            data.report.orders || 0;
+
+
+        document.getElementById(
+            "users"
+        ).innerText =
+            data.report.users || 0;
+
+
+        document.getElementById(
+            "revenue"
+        ).innerText =
+            "₹" +
+            Number(
+                data.report.revenue || 0
+            ).toFixed(2);
+
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Summary Error:",
+            error
+        );
+
+    }
+
+}
+
+
+
+// =====================================================
+// MONTHLY SALES
+// =====================================================
+
+async function loadMonthlySales() {
+
+    try {
+
+
+        const res =
+            await fetch(
+                `${API}/reports/monthly-sales`
+            );
+
+
+        const data =
+            await res.json();
+
+
+        console.log(
+            "Monthly Sales:",
+            data
+        );
+
+
+        if (!data.success) {
+
+            return;
+
+        }
+
+
+        const labels = [];
+
+        const totals = [];
+
+
+        data.sales.forEach(
+            item => {
+
+
+                const monthNames = [
+
+                    "January",
+                    "February",
+                    "March",
+                    "April",
+                    "May",
+                    "June",
+                    "July",
+                    "August",
+                    "September",
+                    "October",
+                    "November",
+                    "December"
+
+                ];
+
+
+                labels.push(
+                    monthNames[
+                        Number(item.month) - 1
+                    ]
+                );
+
+
+                totals.push(
+                    Number(item.total || 0)
+                );
+
+
+            }
+        );
+
+
+
+        new Chart(
+
+            document.getElementById(
+                "salesChart"
+            ),
+
+            {
+
+                type: "bar",
+
+
+                data: {
+
+                    labels: labels,
+
+
+                    datasets: [
+
+                        {
+
+                            label:
+                                "Sales (₹)",
+
+                            data:
+                                totals,
+
+                            borderWidth: 1
+
+                        }
+
+                    ]
+
+                },
+
+
+                options: {
+
+                    responsive: true,
+
+                    maintainAspectRatio: false,
+
+
+                    plugins: {
+
+                        legend: {
+
+                            display: true
+
+                        }
+
+                    },
+
+
+                    scales: {
+
+                        y: {
+
+                            beginAtZero: true
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        );
+
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Monthly Sales Error:",
+            error
+        );
+
+    }
+
+}
+
+
+
+// =====================================================
+// ORDER STATUS
+// =====================================================
+
+async function loadOrderStatus() {
+
+    try {
+
+
+        const res =
+            await fetch(
+                `${API}/reports/order-status`
+            );
+
+
+        const data =
+            await res.json();
+
+
+        console.log(
+            "Order Status:",
+            data
+        );
+
+
+        if (!data.success) {
+
+            return;
+
+        }
+
+
+        const labels = [];
+
+        const totals = [];
+
+
+        data.status.forEach(
+            item => {
+
+                labels.push(
+                    item.status
+                );
+
+                totals.push(
+                    Number(
+                        item.total || 0
+                    )
+                );
+
+            }
+        );
+
+
+        new Chart(
+
+            document.getElementById(
+                "statusChart"
+            ),
+
+            {
+
+                type: "doughnut",
+
+
+                data: {
+
+                    labels: labels,
+
+
+                    datasets: [
+
+                        {
+
+                            data: totals,
+
+                            borderWidth: 1
+
+                        }
+
+                    ]
+
+                },
+
+
+                options: {
+
+                    responsive: true,
+
+                    maintainAspectRatio: false,
+
+
+                    plugins: {
+
+                        legend: {
+
+                            position:
+                                "bottom"
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        );
+
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Order Status Error:",
+            error
+        );
+
+    }
+
+}
+
+
+
+// =====================================================
+// TOP PRODUCTS
+// =====================================================
+
+async function loadTopProducts() {
+
+    try {
+
+
+        const res =
+            await fetch(
+                `${API}/reports/top-products`
+            );
+
+
+        const data =
+            await res.json();
+
+
+        console.log(
+            "Top Products:",
+            data
+        );
+
+
+        const tbody =
+            document.getElementById(
+                "topProducts"
+            );
+
+
+        if (!data.success) {
+
+            tbody.innerHTML = `
+
+                <tr>
+
+                    <td
+                        colspan="3"
+                        class="empty-message"
+                    >
+
+                        Unable to load products.
+
+                    </td>
+
+                </tr>
+
+            `;
+
+            return;
+
+        }
+
+
+        const products =
+            data.products || [];
+
+
+        if (
+            products.length === 0
+        ) {
+
+            tbody.innerHTML = `
+
+                <tr>
+
+                    <td
+                        colspan="3"
+                        class="empty-message"
+                    >
+
+                        No sales data available.
+
+                    </td>
+
+                </tr>
+
+            `;
+
+            return;
+
+        }
+
+
+        let html = "";
+
+
+        products.forEach(
+            (product, index) => {
+
+
+                html += `
+
+                    <tr>
+
+                        <td class="rank">
+
+                            ${index + 1}
+
+                        </td>
+
+
+                        <td>
+
+                            <strong>
+                                ${product.name}
+                            </strong>
+
+                        </td>
+
+
+                        <td>
+
+                            <span
+                                class="badge bg-success"
+                            >
+
+                                ${product.sold}
+
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+
+            }
+        );
+
+
+        tbody.innerHTML =
+            html;
+
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Top Products Error:",
+            error
+        );
+
+    }
+
+}
+
+
+
+// =====================================================
+// LOGOUT
+// =====================================================
+
+function logout() {
+
+    localStorage.clear();
+
+    window.location.href =
+        "../pages/login.html";
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>

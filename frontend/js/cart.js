@@ -1,146 +1,170 @@
-const table = document.getElementById("cartTable");
-const grandTotal = document.getElementById("grandTotal");
-
 const user = JSON.parse(localStorage.getItem("user"));
 
 if (!user) {
-    alert("Please Login First");
     window.location.href = "login.html";
 }
 
 const userId = user.id;
 
+const cartContainer = document.getElementById("cartContainer");
+const totalItems = document.getElementById("totalItems");
+const totalAmount = document.getElementById("totalAmount");
+const grandTotal = document.getElementById("grandTotal");
+
 async function loadCart() {
 
-    const res = await fetch(`http://localhost:5000/api/cart/${userId}`);
+    try {
 
-    const data = await res.json();
+        const res = await fetch(`http://localhost:5000/api/cart/${userId}`);
+        const data = await res.json();
 
-    table.innerHTML = "";
+        cartContainer.innerHTML = "";
 
-    let total = 0;
+        let items = 0;
+        let total = 0;
 
-    if (!data.success || data.cart.length === 0) {
+        if (data.cart.length === 0) {
 
-        table.innerHTML = `
-        <tr>
-            <td colspan="6" class="text-center">
-                <h4>🛒 Your Cart is Empty</h4>
-            </td>
-        </tr>`;
+            cartContainer.innerHTML = `
+                <div class="empty-cart">
+                    <i class="bi bi-cart-x"></i>
+                    <h3>Your Cart is Empty</h3>
+                    <p>Add some delicious ice creams.</p>
 
-        grandTotal.innerHTML = "0";
+                    <a href="products.html"
+                       class="btn btn-warning mt-3">
 
-        return;
-    }
+                       Browse Products
 
-    data.cart.forEach(item => {
+                    </a>
+                </div>
+            `;
 
-        const subtotal = Number(item.price) * item.quantity;
+            totalItems.innerText = "0";
+            totalAmount.innerText = "₹0";
+            grandTotal.innerText = "₹0";
 
-        total += subtotal;
+            return;
+        }
 
-        table.innerHTML += `
+        data.cart.forEach(item => {
 
-        <tr>
+            items += item.quantity;
 
-        <td>
-            <img
-            src="${item.image || 'https://picsum.photos/100?random=' + item.id}"
-            width="80">
-        </td>
+            const subTotal = Number(item.price) * item.quantity;
 
-        <td>${item.name}</td>
+            total += subTotal;
 
-        <td>₹${item.price}</td>
+            cartContainer.innerHTML += `
 
-        <td>
+            <div class="cart-item">
 
-            <button
-            class="btn btn-sm btn-danger"
-            onclick="decrease(${item.id})">
+                <img src="${item.image || 'https://picsum.photos/200?random=' + item.id}">
 
-            -
+                <div class="cart-details">
 
-            </button>
+                    <h4>${item.name}</h4>
 
-            <b class="mx-2">${item.quantity}</b>
+                    <div class="cart-category">
 
-            <button
-            class="btn btn-sm btn-success"
-            onclick="increase(${item.id})">
+                        Premium Ice Cream
 
-            +
+                    </div>
 
-            </button>
+                    <div class="cart-price">
 
-        </td>
+                        ₹${item.price}
 
-        <td>
+                    </div>
 
-            ₹${subtotal}
+                    <div class="quantity-box">
 
-        </td>
+                        <button
+                        class="qty-btn"
+                        onclick="decrease(${item.id})">
 
-        <td>
+                        -
 
-            <button
-            class="btn btn-danger"
-            onclick="removeItem(${item.id})">
+                        </button>
 
-            Remove
+                        <span class="qty">
 
-            </button>
+                        ${item.quantity}
 
-        </td>
+                        </span>
 
-        </tr>
+                        <button
+                        class="qty-btn"
+                        onclick="increase(${item.id})">
 
-        `;
+                        +
 
-    });
+                        </button>
 
-    grandTotal.innerHTML = total;
+                    </div>
 
-}
+                    <button
+                    class="remove-btn"
+                    onclick="removeItem(${item.id})">
 
-async function increase(id){
+                    Remove
 
-    await fetch(`http://localhost:5000/api/cart/increase/${id}`,{
+                    </button>
 
-        method:"PUT"
+                </div>
 
-    });
+            </div>
 
-    loadCart();
-
-}
-
-async function decrease(id){
-
-    await fetch(`http://localhost:5000/api/cart/decrease/${id}`,{
-
-        method:"PUT"
-
-    });
-
-    loadCart();
-
-}
-
-async function removeItem(id){
-
-    if(confirm("Remove this product?")){
-
-        await fetch(`http://localhost:5000/api/cart/${id}`,{
-
-            method:"DELETE"
+            `;
 
         });
 
-        loadCart();
+        totalItems.innerText = items;
+
+        totalAmount.innerText = `₹${total}`;
+
+        grandTotal.innerText = `₹${total}`;
+
+    } catch (err) {
+
+        console.log(err);
 
     }
+
+}
+
+// Increase Quantity
+async function increase(id) {
+
+    await fetch(`http://localhost:5000/api/cart/increase/${id}`, {
+        method: "PUT"
+    });
+
+    loadCart();
+
+}
+
+// Decrease Quantity
+async function decrease(id) {
+
+    await fetch(`http://localhost:5000/api/cart/decrease/${id}`, {
+        method: "PUT"
+    });
+
+    loadCart();
+
+}
+
+// Remove Item
+async function removeItem(id) {
+
+    if (!confirm("Remove this item from cart?")) return;
+
+    await fetch(`http://localhost:5000/api/cart/${id}`, {
+        method: "DELETE"
+    });
+
+    loadCart();
 
 }
 

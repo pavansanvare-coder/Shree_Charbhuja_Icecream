@@ -3,129 +3,356 @@
 
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
 
-<title>Dashboard | Shree Charbhuja Icecream</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <title>Dashboard | Shree Charbhuja Icecream</title>
 
-<link rel="stylesheet" href="../css/dashboard.css">
+
+    <!-- Bootstrap -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+
+    <!-- Bootstrap Icons -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet"
+    >
+
+
+    <!-- Dashboard CSS -->
+
+    <link
+        rel="stylesheet"
+        href="../css/dashboard.css"
+    >
 
 </head>
 
+
 <body>
+
 
 <div class="d-flex">
 
-    <!-- Sidebar -->
+
+    <!-- ================================= -->
+    <!-- SIDEBAR -->
+    <!-- ================================= -->
+
     <div class="sidebar">
 
+
         <h3 class="text-warning text-center mt-3">
+
             🍦 Icecream
+
         </h3>
 
+
         <a href="../index.html">
+
             <i class="bi bi-house"></i>
+
             Home
+
         </a>
+
 
         <a href="products.html">
+
             <i class="bi bi-grid"></i>
+
             Products
+
         </a>
+
 
         <a href="cart.html">
+
             <i class="bi bi-cart"></i>
+
             My Cart
+
         </a>
+
 
         <a href="orders.html">
+
             <i class="bi bi-bag"></i>
+
             My Orders
+
         </a>
+
 
         <a href="profile.html">
+
             <i class="bi bi-person"></i>
+
             Profile
+
         </a>
 
-        <a href="#" onclick="logout()">
+
+        <a
+            href="#"
+            onclick="logout()"
+        >
+
             <i class="bi bi-box-arrow-right"></i>
+
             Logout
+
         </a>
+
 
     </div>
 
-    <!-- Main -->
+
+
+    <!-- ================================= -->
+    <!-- MAIN CONTENT -->
+    <!-- ================================= -->
+
     <div class="content">
 
-        <h2>
-            Welcome,
-            <span id="username"></span>
-            👋
-        </h2>
 
-        <div class="row mt-4">
+        <!-- Welcome -->
 
-            <div class="col-md-3">
+        <div class="d-flex justify-content-between align-items-center">
 
-                <div class="card dashboard-card">
+            <div>
 
-                    <h3 id="cartCount">0</h3>
+                <h2>
 
-                    <p>Cart Items</p>
+                    Welcome,
 
-                </div>
+                    <span id="username">
+                        User
+                    </span>
 
-            </div>
+                    👋
 
-            <div class="col-md-3">
+                </h2>
 
-                <div class="card dashboard-card">
 
-                    <h3>0</h3>
+                <p class="text-muted">
 
-                    <p>Orders</p>
+                    Welcome to your Icecream Dashboard
 
-                </div>
+                </p>
 
             </div>
 
-            <div class="col-md-3">
 
-                <div class="card dashboard-card">
+            <div>
 
-                    <h3>₹0</h3>
-
-                    <p>Total Spent</p>
-
-                </div>
-
-            </div>
-
-            <div class="col-md-3">
-
-                <div class="card dashboard-card">
-
-                    <h3>★ 5</h3>
-
-                    <p>Loyalty</p>
-
-                </div>
+                <i
+                    class="bi bi-person-circle"
+                    style="font-size:45px;"
+                ></i>
 
             </div>
 
         </div>
 
+
+
+        <!-- ================================= -->
+        <!-- DASHBOARD CARDS -->
+        <!-- ================================= -->
+
+        <div class="row mt-4 g-4">
+
+
+            <!-- CART -->
+
+            <div class="col-md-3">
+
+                <div class="card dashboard-card">
+
+
+                    <i
+                        class="bi bi-cart-fill"
+                        style="font-size:30px;"
+                    ></i>
+
+
+                    <h3 id="cartCount">
+
+                        0
+
+                    </h3>
+
+
+                    <p>
+
+                        Cart Items
+
+                    </p>
+
+
+                    <a
+                        href="cart.html"
+                        class="btn btn-warning btn-sm"
+                    >
+
+                        View Cart
+
+                    </a>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ORDERS -->
+
+            <div class="col-md-3">
+
+                <div class="card dashboard-card">
+
+
+                    <i
+                        class="bi bi-bag-fill"
+                        style="font-size:30px;"
+                    ></i>
+
+
+                    <h3 id="orderCount">
+
+                        0
+
+                    </h3>
+
+
+                    <p>
+
+                        My Orders
+
+                    </p>
+
+
+                    <a
+                        href="orders.html"
+                        class="btn btn-warning btn-sm"
+                    >
+
+                        View Orders
+
+                    </a>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- TOTAL SPENT -->
+
+            <div class="col-md-3">
+
+                <div class="card dashboard-card">
+
+
+                    <i
+                        class="bi bi-currency-rupee"
+                        style="font-size:30px;"
+                    ></i>
+
+
+                    <h3 id="totalSpent">
+
+                        ₹0
+
+                    </h3>
+
+
+                    <p>
+
+                        Total Spent
+
+                    </p>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- PROFILE -->
+
+            <div class="col-md-3">
+
+                <div class="card dashboard-card">
+
+
+                    <i
+                        class="bi bi-person-fill"
+                        style="font-size:30px;"
+                    ></i>
+
+
+                    <h3>
+
+                        ★ 5
+
+                    </h3>
+
+
+                    <p>
+
+                        Loyalty Points
+
+                    </p>
+
+
+                    <a
+                        href="profile.html"
+                        class="btn btn-warning btn-sm"
+                    >
+
+                        My Profile
+
+                    </a>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ================================= -->
+        <!-- WELCOME CARD -->
+        <!-- ================================= -->
+
         <div class="card mt-5 p-4">
+
 
             <h4>
 
                 🍨 Welcome to Shree Charbhuja Icecream
 
             </h4>
+
 
             <p>
 
@@ -134,11 +361,88 @@
 
             </p>
 
-            <a href="products.html" class="btn btn-warning">
+
+            <a
+                href="products.html"
+                class="btn btn-warning"
+            >
+
+                <i class="bi bi-grid"></i>
 
                 Explore Products
 
             </a>
+
+
+        </div>
+
+
+        <!-- ================================= -->
+<!-- MY RECENT ORDERS -->
+<!-- ================================= -->
+
+<div class="card mt-5">
+
+    <div class="card-header d-flex justify-content-between align-items-center">
+
+        <h4 class="mb-0">
+            <i class="bi bi-bag-check"></i>
+            My Recent Orders
+        </h4>
+
+        <a
+            href="orders.html"
+            class="btn btn-sm btn-warning"
+        >
+            View All
+        </a>
+
+    </div>
+
+
+    <div class="card-body">
+
+        <div class="table-responsive">
+
+            <table class="table table-hover align-middle">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Order ID</th>
+
+                        <th>Total</th>
+
+                        <th>Payment</th>
+
+                        <th>Status</th>
+
+                        <th>Date</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="recentUserOrders">
+
+                    <tr>
+
+                        <td
+                            colspan="5"
+                            class="text-center text-muted"
+                        >
+
+                            Loading orders...
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
 
         </div>
 
@@ -146,7 +450,152 @@
 
 </div>
 
+
+        <!-- ================================= -->
+        <!-- QUICK LINKS -->
+        <!-- ================================= -->
+
+        <div class="row mt-4 g-3">
+
+
+            <div class="col-md-4">
+
+                <a
+                    href="products.html"
+                    class="text-decoration-none"
+                >
+
+                    <div class="card p-4 text-center">
+
+                        <i
+                            class="bi bi-ice-cream"
+                            style="font-size:35px;"
+                        ></i>
+
+                        <h5 class="mt-2">
+
+                            Explore Ice Creams
+
+                        </h5>
+
+                        <p class="text-muted">
+
+                            Discover delicious flavours
+
+                        </p>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+
+
+            <div class="col-md-4">
+
+                <a
+                    href="cart.html"
+                    class="text-decoration-none"
+                >
+
+                    <div class="card p-4 text-center">
+
+                        <i
+                            class="bi bi-cart"
+                            style="font-size:35px;"
+                        ></i>
+
+                        <h5 class="mt-2">
+
+                            My Cart
+
+                        </h5>
+
+                        <p class="text-muted">
+
+                            Check your selected items
+
+                        </p>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+
+
+            <div class="col-md-4">
+
+                <a
+                    href="orders.html"
+                    class="text-decoration-none"
+                >
+
+                    <div class="card p-4 text-center">
+
+                        <i
+                            class="bi bi-truck"
+                            style="font-size:35px;"
+                        ></i>
+
+                        <h5 class="mt-2">
+
+                            Track Orders
+
+                        </h5>
+
+                        <p class="text-muted">
+
+                            Check your order status
+
+                        </p>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- ================================= -->
+<!-- NAVBAR -->
+<!-- ================================= -->
+
+<div id="navbar"></div>
+
+
+<script src="../components/navbar.js"></script>
+
+
+
+<!-- ================================= -->
+<!-- FOOTER -->
+<!-- ================================= -->
+
+<div id="footer"></div>
+
+
+<script src="../components/footer.js"></script>
+
+
+
+<!-- ================================= -->
+<!-- DASHBOARD JS -->
+<!-- ================================= -->
+
 <script src="../js/dashboard.js"></script>
+
 
 </body>
 

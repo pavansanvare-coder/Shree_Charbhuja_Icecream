@@ -5,7 +5,6 @@ loginForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const email = document.getElementById("email").value.trim();
-
     const password = document.getElementById("password").value.trim();
 
     try {
@@ -27,9 +26,11 @@ loginForm.addEventListener("submit", async (e) => {
 
         const data = await response.json();
 
+        console.log(data);
+
         if (data.success) {
 
-            // Save JWT Token
+            // Save Token
             localStorage.setItem("token", data.token);
 
             // Save User
@@ -37,7 +38,16 @@ loginForm.addEventListener("submit", async (e) => {
 
             alert("✅ Login Successful");
 
-            window.location.href = "dashboard.html";
+            // Role Based Redirect
+            if (data.user.role === "admin") {
+
+                window.location.href = "../admin/dashboard.html";
+
+            } else {
+
+                window.location.href = "dashboard.html";
+
+            }
 
         } else {
 

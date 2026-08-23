@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Manage Orders</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<link rel="stylesheet" href="css/admin.css">
+
+</head>
+
+<body>
+
+<div class="d-flex">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <div class="sidebar">
+
+        <h3>🍦 Admin Panel</h3>
+
+        <a href="dashboard.html">
+            <i class="bi bi-speedometer2"></i>
+            Dashboard
+        </a>
+
+        <a href="products.html">
+            <i class="bi bi-box-seam"></i>
+            Products
+        </a>
+
+        <a class="active" href="orders.html">
+            <i class="bi bi-bag"></i>
+            Orders
+        </a>
+
+        <a href="users.html">
+            <i class="bi bi-people"></i>
+            Users
+        </a>
+
+        <a href="reports.html">
+            <i class="bi bi-bar-chart"></i>
+            Reports
+        </a>
+
+        <a href="#" onclick="logout()">
+            <i class="bi bi-box-arrow-right"></i>
+            Logout
+        </a>
+
+    </div>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <div class="content">
+
+        <!-- TOPBAR -->
+
+        <div class="topbar">
+
+            <h2>Manage Orders</h2>
+
+            <div>
+
+                Welcome,
+
+                <strong id="adminName">Admin</strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- SEARCH -->
+
+        <div class="card mt-4">
+
+            <div class="card-body">
+
+                <div class="row">
+
+                    <div class="col-md-6">
+
+                        <input
+                            type="text"
+                            id="searchOrder"
+                            class="form-control"
+                            placeholder="Search customer, mobile or order ID..."
+                        >
+
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <select
+                            id="statusFilter"
+                            class="form-select"
+                        >
+
+                            <option value="">All Status</option>
+
+                            <option value="Pending">
+                                Pending
+                            </option>
+
+                            <option value="Confirmed">
+                                Confirmed
+                            </option>
+
+                            <option value="Preparing">
+                                Preparing
+                            </option>
+
+                            <option value="Delivered">
+                                Delivered
+                            </option>
+
+                            <option value="Cancelled">
+                                Cancelled
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <button
+                            class="btn btn-warning w-100"
+                            onclick="loadOrders()"
+                        >
+
+                            <i class="bi bi-arrow-clockwise"></i>
+
+                            Refresh Orders
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ORDERS TABLE -->
+
+        <div class="card mt-4">
+
+            <div class="card-header">
+
+                <h4 class="mb-0">
+                    All Orders
+                </h4>
+
+            </div>
+
+
+            <div class="card-body">
+
+                <div class="table-responsive">
+
+                    <table class="table table-hover align-middle">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>ID</th>
+
+                                <th>Customer</th>
+
+                                <th>Mobile</th>
+
+                                <th>City</th>
+
+                                <th>Total</th>
+
+                                <th>Payment</th>
+
+                                <th>Status</th>
+
+                                <th>Date</th>
+
+                                <th>Action</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="ordersTable">
+
+                            <tr>
+
+                                <td
+                                    colspan="9"
+                                    class="text-center"
+                                >
+
+                                    Loading orders...
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- ORDER DETAILS MODAL -->
+<!-- ================================================= -->
+
+<div
+    class="modal fade"
+    id="orderDetailsModal"
+    tabindex="-1"
+>
+
+    <div class="modal-dialog modal-lg">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title">
+
+                    <i class="bi bi-bag-check"></i>
+
+                    Order Details
+
+                </h5>
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                ></button>
+
+            </div>
+
+
+            <div class="modal-body">
+
+                <div id="orderCustomerInfo"
+                     class="mb-4">
+                </div>
+
+
+                <table class="table table-bordered">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Product</th>
+
+                            <th>Price</th>
+
+                            <th>Quantity</th>
+
+                            <th>Subtotal</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="orderItemsTable">
+
+                    </tbody>
+
+                </table>
+
+
+                <div
+                    class="text-end fw-bold fs-5"
+                    id="orderTotal"
+                >
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Bootstrap -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<!-- ================================================= -->
+<!-- JAVASCRIPT -->
+<!-- ================================================= -->
+
+<script>
+
+const API = "http://localhost:5000/api/admin";
+
+let orders = [];
+
+
+// ==========================================
+// PAGE LOAD
+// ==========================================
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const user =
+            JSON.parse(
+                localStorage.getItem("user")
+            );
+
+
+        // Admin Security
+
+        if (
+            !user ||
+            user.role !== "admin"
+        ) {
+
+            window.location.href =
+                "../pages/login.html";
+
+            return;
+
+        }
+
+
+        // Admin Name
+
+        document.getElementById(
+            "adminName"
+        ).innerText = user.name;
+
+
+        // Search
+
+        document.getElementById(
+            "searchOrder"
+        ).addEventListener(
+            "input",
+            filterOrders
+        );
+
+
+        // Status Filter
+
+        document.getElementById(
+            "statusFilter"
+        ).addEventListener(
+            "change",
+            filterOrders
+        );
+
+
+        // Load Orders
+
+        loadOrders();
+
+    }
+);
+
+
+// ==========================================
+// LOAD ORDERS
+// ==========================================
+
+async function loadOrders() {
+
+    try {
+
+        const response =
+            await fetch(
+                `${API}/orders`
+            );
+
+
+        const data =
+            await response.json();
+
+
+        console.log(
+            "Orders Response:",
+            data
+        );
+
+
+        if (!data.success) {
+
+            showError(
+                data.message ||
+                "Unable to load orders"
+            );
+
+            return;
+
+        }
+
+
+        orders =
+            data.orders || [];
+
+
+        filterOrders();
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Orders Error:",
+            error
+        );
+
+
+        showError(
+            "Server connection error"
+        );
+
+    }
+
+}
+
+
+// ==========================================
+// DISPLAY ORDERS
+// ==========================================
+
+function displayOrders(list) {
+
+    const table =
+        document.getElementById(
+            "ordersTable"
+        );
+
+
+    if (list.length === 0) {
+
+        table.innerHTML = `
+            <tr>
+
+                <td
+                    colspan="9"
+                    class="text-center"
+                >
+
+                    No orders found.
+
+                </td>
+
+            </tr>
+        `;
+
+        return;
+
+    }
+
+
+    let html = "";
+
+
+    list.forEach(order => {
+
+        html += `
+
+            <tr>
+
+                <td>
+
+                    <strong>
+                        #${order.id}
+                    </strong>
+
+                </td>
+
+
+                <td>
+
+                    ${order.fullname || "-"}
+
+                </td>
+
+
+                <td>
+
+                    ${order.mobile || "-"}
+
+                </td>
+
+
+                <td>
+
+                    ${order.city || "-"}
+
+                </td>
+
+
+                <td>
+
+                    <strong>
+                        ₹${Number(
+                            order.total_amount || 0
+                        ).toFixed(2)}
+                    </strong>
+
+                </td>
+
+
+                <td>
+
+                    ${order.payment_method || "-"}
+
+                </td>
+
+
+                <td>
+
+                    <select
+                        class="form-select form-select-sm"
+                        onchange="
+                            updateOrderStatus(
+                                ${order.id},
+                                this.value
+                            )
+                        "
+                    >
+
+                        <option
+                            value="Pending"
+                            ${
+                                order.status ===
+                                "Pending"
+                                ? "selected"
+                                : ""
+                            }
+                        >
+                            Pending
+                        </option>
+
+
+                        <option
+                            value="Confirmed"
+                            ${
+                                order.status ===
+                                "Confirmed"
+                                ? "selected"
+                                : ""
+                            }
+                        >
+                            Confirmed
+                        </option>
+
+
+                        <option
+                            value="Preparing"
+                            ${
+                                order.status ===
+                                "Preparing"
+                                ? "selected"
+                                : ""
+                            }
+                        >
+                            Preparing
+                        </option>
+
+
+                        <option
+                            value="Delivered"
+                            ${
+                                order.status ===
+                                "Delivered"
+                                ? "selected"
+                                : ""
+                            }
+                        >
+                            Delivered
+                        </option>
+
+
+                        <option
+                            value="Cancelled"
+                            ${
+                                order.status ===
+                                "Cancelled"
+                                ? "selected"
+                                : ""
+                            }
+                        >
+                            Cancelled
+                        </option>
+
+                    </select>
+
+                </td>
+
+
+                <td>
+
+                    ${
+                        order.created_at
+                        ? new Date(
+                            order.created_at
+                          ).toLocaleDateString()
+                        : "-"
+                    }
+
+                </td>
+
+
+                <td>
+
+                    <button
+                        class="btn btn-primary btn-sm"
+                        onclick="
+                            viewOrder(
+                                ${order.id}
+                            )
+                        "
+                    >
+
+                        <i class="bi bi-eye"></i>
+
+                        View
+
+                    </button>
+
+                </td>
+
+            </tr>
+
+        `;
+
+    });
+
+
+    table.innerHTML =
+        html;
+
+}
+
+
+// ==========================================
+// FILTER ORDERS
+// ==========================================
+
+function filterOrders() {
+
+    const search =
+        document.getElementById(
+            "searchOrder"
+        ).value
+        .toLowerCase()
+        .trim();
+
+
+    const status =
+        document.getElementById(
+            "statusFilter"
+        ).value;
+
+
+    const filtered =
+        orders.filter(order => {
+
+            const matchesSearch =
+
+                String(order.id)
+                    .includes(search)
+
+                ||
+
+                (order.fullname || "")
+                    .toLowerCase()
+                    .includes(search)
+
+                ||
+
+                (order.mobile || "")
+                    .toLowerCase()
+                    .includes(search);
+
+
+            const matchesStatus =
+
+                status === "" ||
+                order.status === status;
+
+
+            return (
+                matchesSearch &&
+                matchesStatus
+            );
+
+        });
+
+
+    displayOrders(
+        filtered
+    );
+
+}
+
+
+// ==========================================
+// UPDATE STATUS
+// ==========================================
+
+async function updateOrderStatus(
+    id,
+    status
+) {
+
+    try {
+
+        const response =
+            await fetch(
+                `${API}/orders/${id}`,
+                {
+
+                    method: "PUT",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        status: status
+                    })
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        console.log(
+            "Status Response:",
+            data
+        );
+
+
+        if (data.success) {
+
+            alert(
+                "✅ " +
+                data.message
+            );
+
+
+            // Update local order
+
+            const order =
+                orders.find(
+                    o => o.id === id
+                );
+
+
+            if (order) {
+
+                order.status =
+                    status;
+
+            }
+
+        }
+
+        else {
+
+            alert(
+                "❌ " +
+                (
+                    data.message ||
+                    "Status update failed"
+                )
+            );
+
+
+            loadOrders();
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Status Error:",
+            error
+        );
+
+
+        alert(
+            "Server Error"
+        );
+
+
+        loadOrders();
+
+    }
+
+}
+
+
+// ==========================================
+// VIEW ORDER
+// ==========================================
+
+async function viewOrder(id) {
+
+    try {
+
+        const response =
+            await fetch(
+                `${API}/orders/${id}`
+            );
+
+
+        const data =
+            await response.json();
+
+
+        console.log(
+            "Order Details:",
+            data
+        );
+
+
+        if (!data.success) {
+
+            alert(
+                data.message ||
+                "Unable to load order"
+            );
+
+            return;
+
+        }
+
+
+        const order =
+            orders.find(
+                o => o.id === id
+            );
+
+
+        // Customer Info
+
+        document.getElementById(
+            "orderCustomerInfo"
+        ).innerHTML = `
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <strong>
+                        Order ID:
+                    </strong>
+
+                    #${order.id}
+
+                    <br>
+
+                    <strong>
+                        Customer:
+                    </strong>
+
+                    ${order.fullname || "-"}
+
+                    <br>
+
+                    <strong>
+                        Mobile:
+                    </strong>
+
+                    ${order.mobile || "-"}
+
+                </div>
+
+
+                <div class="col-md-6">
+
+                    <strong>
+                        Address:
+                    </strong>
+
+                    ${order.address || "-"}
+
+                    <br>
+
+                    <strong>
+                        City:
+                    </strong>
+
+                    ${order.city || "-"}
+
+                    <br>
+
+                    <strong>
+                        Payment:
+                    </strong>
+
+                    ${order.payment_method || "-"}
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        // Products
+
+        const table =
+            document.getElementById(
+                "orderItemsTable"
+            );
+
+
+        let html = "";
+
+        let total = 0;
+
+
+        if (
+            !data.items ||
+            data.items.length === 0
+        ) {
+
+            html = `
+
+                <tr>
+
+                    <td
+                        colspan="4"
+                        class="text-center"
+                    >
+
+                        No products found.
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }
+
+        else {
+
+            data.items.forEach(item => {
+
+                const price =
+                    Number(
+                        item.price || 0
+                    );
+
+
+                const quantity =
+                    Number(
+                        item.quantity || 0
+                    );
+
+
+                const subtotal =
+                    price * quantity;
+
+
+                total += subtotal;
+
+
+                html += `
+
+                    <tr>
+
+                        <td>
+                            ${item.name}
+                        </td>
+
+                        <td>
+                            ₹${price.toFixed(2)}
+                        </td>
+
+                        <td>
+                            ${quantity}
+                        </td>
+
+                        <td>
+                            ₹${subtotal.toFixed(2)}
+                        </td>
+
+                    </tr>
+
+                `;
+
+            });
+
+        }
+
+
+        table.innerHTML =
+            html;
+
+
+        document.getElementById(
+            "orderTotal"
+        ).innerText =
+            "Total: ₹" +
+            total.toFixed(2);
+
+
+        // Open Modal
+
+        const modal =
+            new bootstrap.Modal(
+                document.getElementById(
+                    "orderDetailsModal"
+                )
+            );
+
+
+        modal.show();
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "View Order Error:",
+            error
+        );
+
+
+        alert(
+            "Unable to load order details"
+        );
+
+    }
+
+}
+
+
+// ==========================================
+// ERROR
+// ==========================================
+
+function showError(message) {
+
+    document.getElementById(
+        "ordersTable"
+    ).innerHTML = `
+
+        <tr>
+
+            <td
+                colspan="9"
+                class="text-center text-danger"
+            >
+
+                ${message}
+
+            </td>
+
+        </tr>
+
+    `;
+
+}
+
+
+// ==========================================
+// LOGOUT
+// ==========================================
+
+function logout() {
+
+    localStorage.clear();
+
+    window.location.href =
+        "../pages/login.html";
+
+}
+
+</script>
+
+</body>
+
+</html>

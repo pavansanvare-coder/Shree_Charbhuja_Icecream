@@ -1,0 +1,263 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+:root{
+
+    --primary:#f59e0b;
+    --dark:#1f2937;
+    --white:#fff;
+    --bg:#f5f7fb;
+    --shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+body{
+
+    background:var(--bg);
+
+}
+
+/* Sidebar */
+
+.sidebar{
+
+    width:250px;
+    height:100vh;
+
+    background:var(--dark);
+
+    position:fixed;
+
+    left:0;
+
+    top:0;
+
+    padding:25px 0;
+
+}
+
+.sidebar h3{
+
+    color:white;
+
+    text-align:center;
+
+    margin-bottom:40px;
+
+}
+
+.sidebar a{
+
+    display:block;
+
+    color:#d1d5db;
+
+    text-decoration:none;
+
+    padding:15px 25px;
+
+    margin:5px 15px;
+
+    border-radius:10px;
+
+    transition:.3s;
+
+}
+
+.sidebar a:hover{
+
+    background:var(--primary);
+
+    color:white;
+
+}
+
+.sidebar a.active{
+
+    background:var(--primary);
+
+    color:white;
+
+}
+
+.sidebar i{
+
+    margin-right:10px;
+
+}
+
+/* Content */
+
+.content{
+
+    margin-left:250px;
+
+    padding:30px;
+
+}
+
+/* Topbar */
+
+.topbar{
+
+    background:white;
+
+    padding:20px 30px;
+
+    border-radius:15px;
+
+    box-shadow:var(--shadow);
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+/* Cards */
+
+.dashboard-card{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:18px;
+
+    text-align:center;
+
+    box-shadow:var(--shadow);
+
+    transition:.3s;
+
+    margin-bottom:25px;
+
+}
+
+.dashboard-card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.dashboard-card .icon{
+
+    font-size:45px;
+
+    color:var(--primary);
+
+}
+
+.dashboard-card h2{
+
+    margin-top:15px;
+
+    font-size:35px;
+
+    font-weight:700;
+
+}
+
+.dashboard-card p{
+
+    color:#777;
+
+}
+
+/* Table */
+
+.card{
+
+    border:none;
+
+    border-radius:18px;
+
+    box-shadow:var(--shadow);
+
+}
+
+.table{
+
+    margin-bottom:0;
+
+}
+
+.table thead{
+
+    background:#fff3cd;
+
+}
+
+.table th{
+
+    color:#333;
+
+}
+
+/* Badge */
+
+.badge{
+
+    padding:8px 12px;
+
+    border-radius:30px;
+
+}
+
+/* Responsive */
+
+@media(max-width:992px){
+
+.sidebar{
+
+    width:220px;
+
+}
+
+.content{
+
+    margin-left:220px;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.sidebar{
+
+    width:100%;
+
+    position:relative;
+
+    height:auto;
+
+}
+
+.content{
+
+    margin-left:0;
+
+    padding:15px;
+
+}
+
+.topbar{
+
+    flex-direction:column;
+
+    gap:10px;
+
+    text-align:center;
+
+}
+
+}
